@@ -1,0 +1,24 @@
+<h1>{% if task %}Editar{% else %}Crear{% endif %} Tarea</h1>
+
+<form method="post">
+    {% csrf_token %}
+    
+    {{ form.as_p }}  <!-- Renderiza el formulario de Django automáticamente -->
+
+    <button type="submit">{% if task %}Actualizar{% else %}Crear{% endif %}</button>
+</form>
+
+<a href="{% url 'task_list' %}">Volver a la lista de tareas</a>
+
+{% if form.errors %}
+    <ul class="errorlist">
+        {% for field in form %}
+            {% for error in field.errors %}
+                <li>{{ field.label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}

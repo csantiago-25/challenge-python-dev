@@ -1,0 +1,12 @@
+<h1>Lista de Tareas</h1>
+<ul>
+    {% for task in tasks %}
+        <li>
+            {{ task.title }} - {{ task.description }} 
+            <a href="{% url 'task_update' task.id %}">Editar</a> 
+            <a href="{% url 'task_delete' task.id %}">Eliminar</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'task_create' %}">Crear nueva tarea</a>
